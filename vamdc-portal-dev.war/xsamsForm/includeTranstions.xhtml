@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+
+	<style>
+		.top {
+			vertical-align: top;
+		}
+		
+		.pbody {
+			padding: 0px;
+			height: 120px;
+			width: 150px;
+		}
+	</style>
+<a4j:form ajaxSubmit="true">
+	<h:panelGrid columns="1" columnClasses="top, top">
+		<h:panelGrid columns="3" columnClasses="top, top">
+
+			<h:panelGrid columns="2" style="float: right">
+				<h:outputText value="Input Parameters" />
+				<h:selectOneMenu 
+					value="#{transitions.inputParameter}">					
+					<f:selectItem itemValue="Wavelength" itemLabel="Wavelength" />
+					<f:selectItem itemValue="Wavenumber" itemLabel="Wavenumber" />
+					<f:selectItem itemValue="Frequency" itemLabel="Frequency" />
+					<f:selectItem itemValue="energy" itemLabel="Energy" />
+					
+					<a4j:support event="onchange"
+									action="#{transitions.inputParameterChange()}"
+									reRender="unitPanel"></a4j:support>
+				</h:selectOneMenu>
+			</h:panelGrid>
+			
+			<h:panelGrid columns="2" style="float: right" id="unitPanel">
+				<h:outputText value="Units" />
+				<h:selectOneMenu
+					>
+					<f:selectItems value="#{transitions.unitsSelectItem}"/>
+					
+				</h:selectOneMenu>
+			</h:panelGrid>
+		</h:panelGrid>
+	</h:panelGrid>
+</a4j:form>
+</ui:composition>

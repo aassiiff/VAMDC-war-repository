@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>XSAMS Viewer</title>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+		<script type="text/javascript" src="js/xml.js"></script>
+		<script type="text/javascript" src="js/table_sort.js"></script>
+		<link rel="stylesheet" type="text/css" media="screen" href="css/screen.css"/>
+	</head>
+
+	<body>
+		<div id="xml_wrapper">
+			<h1 id="title">XSAMS Viewer</h1>
+			<h3 id="xml_dec_nav">Select a state energy range:</h3>
+			<ul id="xml_nav">
+				<li><a class="filter_10" href="javascript:void(0)"><span>&lt; 1500</span></a></li>
+				<li><a class="filter_10_20" href="javascript:void(0)"><span>1500 &ndash; 3000</span></a></li>
+				<li><a class="filter_20_30" href="javascript:void(0)"><span>3000 &ndash; 4500</span></a></li>
+				<li><a class="filter_40" href="javascript:void(0)"><span>4500 +</span></a></li>
+				<li class="xml_nav_hit"><a class="filter_0 hit" href="javascript:void(0)"><span>All</span></a> </li>
+			</ul>
+			<h4 id="xml_desc_header"><strong>protip:</strong> sort by clicking on the column headers</h4>
+			<table>
+				<thead>
+					<tr>
+						<th class="header headerSortUp">State ID</th>
+						<th class="header">State Energy Value</th>
+						<th class="header">State Energy Value Unit</th>
+						<th class="header">Total Statistical Weight</th>
+						<th class="header">Nuclear Statistical Weight</th>
+						<th class="header">Nuclear Spin Isomer</th>
+						<th class="header">Case ID</th>
+						<th class="header">Elec State Label</th>
+						<th class="header">J</th>
+						<th class="header">Ka</th>
+						<th class="header">Kc</th>
+						<th class="header">V1</th>
+						<th class="header">V2</th>
+						<th class="header">V3</th>
+						<th class="header">Energy Origin</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+			
+		<p id="author">Created by <a href="http://apm37.ast.cam.ac.uk:9080/vamdc-portal-level2/">Asif Akram</a> &mdash; last revised: 16 Sept 2011</p>
+	</body>
+</html>

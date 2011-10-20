@@ -1,0 +1,15 @@
+<mbean code="org.jboss.varia.property.SystemPropertiesService" name="jboss.util:type=Service,name=something">
+  <attribute name="Properties">
+    fileServerURL=http://apm37.ast.cam.ac.uk:9090
+    staticApplicationURL=http://localhost:8080/vamdcstatic
+    processSpreadSheet=/opt/queryResults/processList.xlsx
+    registryURL=http://registry.vamdc.eu/registry-level2/services/RegistryQueryv1_0
+    registryURL_release=http://msslxv.mssl.ucl.ac.uk/vamdc_registry/services/RegistryQueryv1_0
+    registryURL_dev=http://casx019-zone1.ast.cam.ac.uk/registry/services/RegistryQueryv1_0
+    queryString_0=declare namespace ri='http://www.ivoa.net/xml/RegistryInterface/v1.0'; declare namespace xsi='http://www.w3.org/2001/XMLSchema-instance'; //RootResource
+    queryString_1=declare namespace ri='http://www.ivoa.net/xml/RegistryInterface/v1.0'; declare namespace xsi='http://www.w3.org/2001/XMLSchema-instance'; //ri:Resource[matches(@xsi:type, 'Registry')]
+    queryString_2=declare namespace ri='http://www.ivoa.net/xml/RegistryInterface/v1.0'; declare namespace xsi='http://www.w3.org/2001/XMLSchema-instance'; //ri:Resource[matches(@xsi:type,'CeaApplication')]
+    queryString_3=declare namespace ri='http://www.ivoa.net/xml/RegistryInterface/v1.0'; declare namespace xsi='http://www.w3.org/2001/XMLSchema-instance'; //ri:Resource[matches(@xsi:type,'Service')]
+ </attribute>
+</mbean>
+

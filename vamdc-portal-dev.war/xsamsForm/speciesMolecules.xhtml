@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+	<style>
+		.top {
+			vertical-align: top;
+		}
+		
+		.pbody {
+			padding: 0px;
+			height: 120px;
+			width: 150px;
+		}
+		.inputTextClass {
+			 background-color:#CCCCFF;
+			font-size:08px
+		}
+	</style>
+
+	<h:panelGrid columns="2">
+		<h:panelGrid columns="1">
+			<rich:spacer width="100"/>
+		</h:panelGrid>
+		<rich:panel style="background-color:#E9F1FF">
+			<f:facet name="header">
+				<h:outputText>Molecules
+				<rich:spacer width="320" />
+				<a4j:commandLink reRender="formPanel1A, formButtonsPanel" action="#{navigator.clearMoleculesForm()}"
+					rendered="#{!navigator.stage1Display}">				
+	                <h:outputText value="X Close" /> 
+	            </a4j:commandLink></h:outputText>				
+			</f:facet>
+
+			<h:panelGrid columns="1" columnClasses="top, top" id="speciesMoleculesPanel">
+				<h:panelGrid columns="3" columnClasses="top, top">
+					<h:outputText value="Chemical Name:" />
+					<rich:spacer width="30" height="10" />
+					<h:inputText id="moleculeChemicalName"
+						value="#{speciesMolecules.moleculeChemicalName}" style=" width : 265px;" disabled="#{not speciesMolecules.moleculeChemicalNameBoolean}" 
+						styleClass="#{not speciesMolecules.moleculeChemicalNameBoolean ? 'inputTextClass' : 'color:pink'}">
+						<rich:suggestionbox for="moleculeChemicalName" var="result" suggestionAction="#{speciesMolecules.getMoleculeNameQueryWildcard}" width="280" border="0">
+			                <h:column style=" width : 253px;">			
+			                	<h:outputText value="#{result.molecName}" style=" width : 253px;"/>			
+			                </h:column>
+			                <!-- -->
+			                <a4j:support event="onselect" action="#{speciesMolecules.getMoleculeNameQuery}" 
+								reRender="moleculesDBQueryPanel"/>				                 
+	                	</rich:suggestionbox>
+					<!--  -->		
+						<a4j:support event="onblur" action="#{speciesMolecules.disableIndividualFieldsOnBlur('moleculeChemicalName')}" 
+								reRender="moleculeStoichiometricFormula, moleculeInchiKey, moleculeInchi"></a4j:support>
+					
+								
+						<a4j:support event="onfocus" action="#{speciesMolecules.disableIndividualFieldsOnFocus('moleculeChemicalName')}" 
+								reRender="moleculeStoichiometricFormula, moleculeInchiKey, moleculeInchi"></a4j:support>
+								
+						<a4j:support event="onkeyup" action="#{selectedRestrictables.keyEventOnBlur('moleculeChemicalName', speciesMolecules.moleculeChemicalName, '')}" 
+								reRender="rightPanel"></a4j:support>								
+					</h:inputText>
+					
+					<h:outputText value="Stoichiometric Formula:" />
+					<rich:spacer width="20" height="10" />
+					<h:inputText id="moleculeStoichiometricFormula"
+						value="#{speciesMolecules.moleculeStoichiometricFormula}" style=" width : 265px;" disabled="#{not speciesMolecules.moleculeOrdinaryStructuralFormulaBoolean}"
+						styleClass="#{not speciesMolecules.moleculeOrdinaryStructuralFormulaBoolean ? 'inputTextClass' : 'color:pink'}">
+						
+						<rich:suggestionbox for="moleculeStoichiometricFormula" var="result" suggestionAction="#{speciesMolecules.getStoichiometricFormulaQueryWildcard}" width="280" border="0">
+			                <h:column style=" width : 253px;">			
+			                	<h:outputText value="#{result.stoichiometricFormula}" style=" width : 253px;"/>			
+			                </h:column>
+			                <!-- -->
+			                <a4j:support event="onselect" action="#{speciesMolecules.getStoichiometricFormulaQuery}" 
+								reRender="moleculesDBQueryPanel"/>				                 
+	                	</rich:suggestionbox>
+	                	
+							<a4j:support event="onkeyup" action="#{selectedRestrictables.keyEventOnBlur('MoleculeStoichiometricFormula', speciesMolecules.moleculeStoichiometricFormula, '')}" 
+								reRender="rightPanel"></a4j:support>
+								
+							<a4j:support event="onfocus" action="#{speciesMolecules.disableIndividualFieldsOnFocus('moleculeStoichiometricFormula')}" 
+								reRender="moleculeChemicalName, moleculeInchiKey, moleculeInchi, moleculesDBQueryPanel"></a4j:support>
+								
+							<a4j:support event="onblur" action="#{speciesMolecules.disableIndividualFieldsOnBlur('moleculeStoichiometricFormula')}" 
+								reRender="moleculeChemicalName, moleculeInchiKey, moleculeInchi, moleculesDBQueryPanel">
+								</a4j:support>
+					</h:inputText>
+				</h:panelGrid>
+					
+				<h:panelGrid columns="6">
+					<h:outputText value="Molecule Ion Charge:"></h:outputText>
+					<rich:spacer width="30" height="10" />
+					<h:outputText value="Range">
+					</h:outputText>
+					<h:inputText value="#{speciesMolecules.moleculeIonChargeFrom}"
+						style=" width : 104px;" disabled="#{not speciesMolecules.editable}">
+						<a4j:support event="onkeyup" action="#{selectedRestrictables.keyEventOnBlur('MoleculeIonCharge', speciesMolecules.moleculeIonChargeFrom, speciesMolecules.moleculeIonChargeTo)}" 
+								reRender="rightPanel"></a4j:support>
+					</h:inputText>
+					<h:outputText value=" " style=" font : bold;" />
+					<h:inputText value="#{speciesMolecules.moleculeIonChargeTo}"
+						style=" width : 104px;" disabled="#{not speciesMolecules.editable}">
+						<a4j:support event="onkeyup" action="#{selectedRestrictables.keyEventOnBlur('MoleculeIonCharge', speciesMolecules.moleculeIonChargeTo, speciesMolecules.moleculeIonChargeFrom)}" 
+								reRender="rightPanel"></a4j:support>
+					</h:inputText>
+				</h:panelGrid>
+					
+				<h:panelGrid columns="3" columnClasses="top, top">
+					<h:outputText value="Molecule InChI:" />
+					<rich:spacer width="60" height="10" />
+					<h:inputTextarea id="moleculeInchi"
+						value="#{speciesMolecules.moleculeInchi}" style=" width : 265px;" disabled="#{not speciesMolecules.moleculeInchiBoolean}" rows="2" 
+						styleClass="#{not speciesMolecules.moleculeInchiBoolean ? 'inputTextClass' : 'color:pink'}">
+						<a4j:support event="onkeyup" action="#{selectedRestrictables.keyEventOnBlur('moleculeInchi', speciesMolecules.moleculeInchi, '')}" 
+								reRender="rightPanel"></a4j:support>
+						<a4j:support event="onblur" action="#{speciesMolecules.disableIndividualFieldsOnBlur('moleculeInchi')}" 
+							reRender="moleculeChemicalName, moleculeInchiKey, moleculeStoichiometricFormula, moleculesDBQueryPanel"></a4j:support>
+							
+						<a4j:support event="onfocus" action="#{speciesMolecules.disableIndividualFieldsOnFocus('moleculeInchi')}" 
+								reRender="moleculeChemicalName, moleculeInchiKey, moleculeStoichiometricFormula, moleculesDBQueryPanel"></a4j:support>
+					</h:inputTextarea>
+
+					<h:outputText value="InChI Key:" />
+					<rich:spacer width="30" height="10" />
+					<h:inputText id="moleculeInchiKey"
+						value="#{speciesMolecules.moleculeInchiKey}" style=" width : 265px;" disabled="#{not speciesMolecules.moleculeInchiKeyBoolean}" 
+						styleClass="#{not speciesMolecules.moleculeInchiKeyBoolean ? 'inputTextClass' : 'color:pink'}">
+						<a4j:support event="onkeyup" action="#{selectedRestrictables.keyEventOnBlur('moleculeInchiKey', speciesMolecules.moleculeInchiKey, '')}" 
+								reRender="rightPanel"></a4j:support>
+								<!-- -->
+						<a4j:support event="onblur" action="#{speciesMolecules.disableIndividualFieldsOnBlur('moleculeInchiKey')}" 
+							reRender="moleculeChemicalName, moleculeInchi, moleculeStoichiometricFormula, moleculesDBQueryPanel"></a4j:support>
+						<a4j:support event="onfocus" action="#{speciesMolecules.disableIndividualFieldsOnFocus('moleculeInchiKey')}" 
+								reRender="moleculeChemicalName, moleculeInchi, moleculeStoichiometricFormula, moleculesDBQueryPanel"></a4j:support>	
+					</h:inputText>					
+				</h:panelGrid>
+			</h:panelGrid>
+			
+			<h:panelGrid columns="1"  id="imageFromChemicalName">
+			 	<h:graphicImage id="frImage" value="#{speciesMolecules.imageFromChemicalName}" width="60%"/>
+			</h:panelGrid>
+			<h:panelGrid columns="1"  id="moleculesDBQueryPanel">
+				<ui:include src="/xsamsForm/moleculesDBQueryResult.xhtml" />
+			</h:panelGrid>
+		</rich:panel>
+	</h:panelGrid>
+</ui:composition>
