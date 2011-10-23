@@ -1,0 +1,164 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+	<style>
+		.panelBodyClass {
+			background-color: #E9F1FF
+		}
+</style>
+
+	<h:panelGrid columns="2" style="vertical-align:top; valign: top;">
+		<h:panelGrid columns="1">
+			<rich:spacer width="100" />
+		</h:panelGrid>
+		<rich:simpleTogglePanel style="background-color:#E9F1FF"
+			id="atomPanel" switchType="client" bodyClass="panelBodyClass">
+
+
+			<f:facet name="header">
+				<h:outputText>Atoms
+					<rich:spacer width="435" />
+					
+					<h:graphicImage id="clearPanel_#{species.id}" value="/img/erase.png" width="15">
+					<rich:toolTip value="Clear Form Fields" styleClass="tooltip"/>
+						<a4j:support event="onclick" reRender="formPanel1, formButtonsPanel"
+						action="#{species.backingBean.clearFields()}"></a4j:support>
+					</h:graphicImage>
+					
+					
+					<rich:spacer width="21" />
+					<h:graphicImage id="removePanel_#{species.id}" value="/img/false.png">
+					<rich:toolTip value="Remove the Form Panel" styleClass="tooltip" />
+						<a4j:support event="onclick" reRender="formPanel1, formButtonsPanel"
+						action="#{navigator.removeSpeciesAtomsPanel(species)}"></a4j:support>
+					</h:graphicImage>
+					<rich:spacer width="22" />
+				</h:outputText>
+
+			</f:facet>
+
+			<h:panelGrid columns="1">
+				<h:panelGrid columns="3">
+					<h:outputText value="Atomic (elemental) symbol:"
+						style="font-weight:bold" />
+					<rich:spacer width="18" />
+					<h:inputText value="#{species.backingBean.atomSymbol}"
+						style=" width : 351px;"
+						disabled="#{not species.backingBean.editable}">
+						<a4j:support event="onkeyup"
+							action="#{selectedRestrictables.keyEventOnBlur('atomSymbol', species.backingBean.atomSymbol, '')}"
+							reRender="rightPanel"></a4j:support>
+					</h:inputText>
+
+					<h:outputText value="Atom Inchi:" style="font-weight:bold" />
+					<rich:spacer width="0" />
+					<h:inputText value="#{species.backingBean.atomInchi}"
+						style=" width : 351px;"
+						disabled="#{not species.backingBean.editable}">
+						<a4j:support event="onkeyup"
+							action="#{selectedRestrictables.keyEventOnBlur('atomInchi', species.backingBean.atomInchi, '')}"
+							reRender="rightPanel"></a4j:support>
+					</h:inputText>
+
+					<h:outputText value="Atom Inchi Key:" style="font-weight:bold" />
+					<rich:spacer width="0" />
+					<h:inputText value="#{species.backingBean.atomInchiKey}"
+						style=" width : 351px;"
+						disabled="#{not species.backingBean.editable}">
+						<a4j:support event="onkeyup"
+							action="#{selectedRestrictables.keyEventOnBlur('atomInchiKey', species.backingBean.atomInchiKey, '')}"
+							reRender="rightPanel"></a4j:support>
+					</h:inputText>
+				</h:panelGrid>
+
+				<h:panelGrid columns="6">
+					<h:outputText value="Atom Mass Number:" style="font-weight:bold" />
+					<rich:spacer width="48"/>
+					<h:outputText value="Range" />
+					<h:inputText value="#{species.backingBean.atomMassNumberFrom}"
+						style=" width : 145px;" disabled="#{not species.backingBean.editable}">
+						<a4j:support event="onkeyup"
+							action="#{selectedRestrictables.keyEventOnBlur('atomMassNumber', species.backingBean.atomMassNumberFrom, species.backingBean.atomMassNumberTo)}"
+							reRender="rightPanel"></a4j:support>
+					</h:inputText>
+					<rich:spacer width="11"/>
+					<h:inputText value="#{species.backingBean.atomMassNumberTo}"
+						style=" width : 145px;" disabled="#{not species.backingBean.editable}">
+						<a4j:support event="onkeyup"
+							action="#{selectedRestrictables.keyEventOnBlur('atomMassNumber', species.backingBean.atomMassNumberTo, species.backingBean.atomMassNumberFrom)}"
+							reRender="rightPanel"></a4j:support>
+					</h:inputText>
+
+					<h:outputText value="Atom Ion Charge:" style="font-weight:bold"></h:outputText>
+					<rich:spacer width="10" />
+					<h:outputText value="Range">
+					</h:outputText>
+					<h:inputText value="#{species.backingBean.atomIonChargeFrom}"
+						style=" width : 145px;" disabled="#{not species.backingBean.editable}">
+						<a4j:support event="onkeyup"
+							action="#{selectedRestrictables.keyEventOnBlur('atomIonCharge', species.backingBean.atomIonChargeFrom, species.backingBean.atomIonChargeTo)}"
+							reRender="rightPanel"></a4j:support>
+					</h:inputText>
+					<h:outputText value=" " style=" font : bold;" />
+					<h:inputText value="#{species.backingBean.atomIonChargeTo}"
+						style=" width : 145px;" disabled="#{not species.backingBean.editable}">
+						<a4j:support event="onkeyup"
+							action="#{selectedRestrictables.keyEventOnBlur('atomIonCharge', species.backingBean.atomIonChargeTo, species.backingBean.atomIonChargeFrom)}"
+							reRender="rightPanel"></a4j:support>
+					</h:inputText>
+
+					<h:outputText value="Atom Nuclear Charge:" style="font-weight:bold"></h:outputText>
+					<rich:spacer width="10" />
+					<h:outputText value="Range">
+					</h:outputText>
+					<h:inputText value="#{species.backingBean.atomNuclearChargeFrom}"
+						style=" width : 145px;" disabled="#{not species.backingBean.editable}">
+						<a4j:support event="onkeyup"
+							action="#{selectedRestrictables.keyEventOnBlur('atomNuclearCharge', species.backingBean.atomNuclearChargeFrom, species.backingBean.atomNuclearChargeTo)}"
+							reRender="rightPanel"></a4j:support>
+					</h:inputText>
+					<h:outputText value=" " style=" font : bold;" />
+					<h:inputText value="#{species.backingBean.atomNuclearChargeTo}"
+						style=" width : 145px;" disabled="#{not species.backingBean.editable}">
+						<a4j:support event="onkeyup"
+							action="#{selectedRestrictables.keyEventOnBlur('atomNuclearCharge', species.backingBean.atomNuclearChargeTo, species.backingBean.atomNuclearChargeFrom)}"
+							reRender="rightPanel"></a4j:support>
+					</h:inputText>
+				</h:panelGrid>
+				<h:panelGrid columns="3" rendered="#{navigator.vssVersion == 'VSS2'}">
+					<a4j:include viewId="vss2Prefix.xhtml" />
+				</h:panelGrid>
+				<h:panelGrid >
+					<h:panelGrid columns="3">
+						<h:outputText value="Advanced Options" id="atomAdvancedOptions_#{species.id}"
+							style="font-weight:bold" />
+						<rich:spacer width="366" />
+						<h:panelGrid columns="2">
+							<h:graphicImage value="/img/toggle_collapse.png"
+								onclick="hideDivA_#{species.id}({duration:0.7})" />
+							<h:graphicImage value="/img/toggle-expand.png"
+								onclick="showDivA_#{species.id}()" />
+						</h:panelGrid>
+					</h:panelGrid>
+					<!-- There is problem in setting the id for the layoutPanel .... bdbox_#{species.id} -->
+					<rich:layout>
+						<rich:layoutPanel switchType="client" id="bdbox1" style="display:none">
+							<a4j:include viewId="includeTranstions.xhtml" />
+							<rich:effect name="hideDivA_#{species.id}" for="bdbox1" type="BlindUp"
+								params="duration:1.0" />
+							<rich:effect name="showDivA_#{species.id}" for="bdbox1" type="BlindDown"
+								params="duration:1.0" />
+						</rich:layoutPanel>
+					</rich:layout>
+
+				</h:panelGrid>
+			</h:panelGrid>
+		</rich:simpleTogglePanel>
+	</h:panelGrid>
+</ui:composition>

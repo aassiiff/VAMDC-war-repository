@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<table width="100%">
+		<tr>
+			<td><h:panelGrid id="mainOptionPanel">
+				<a4j:include id="mainOptionBody"
+					viewId="#{navigator.mainOptionPanel}" />
+			</h:panelGrid></td>
+
+			<td style="vertical-align: top; horizontal-align: left"><a4j:form
+				ajaxSubmit="true">
+				<h:panelGrid>
+					<h:panelGrid>
+						<a4j:include viewId="/xsamsForm/queryCompliancePanel.xhtml" />
+					</h:panelGrid>
+
+					<h:panelGrid id="formPanel1">
+						<a4j:repeat value="#{navigator.speciesAtomsPanelHolderList}"
+							var="species" id="atomsPanel">
+							<a4j:include viewId="#{navigator.getAtomsForm(species.id)}" />
+						</a4j:repeat>
+					</h:panelGrid>
+					<h:panelGrid id="formPanel1A">
+						<a4j:repeat value="#{navigator.speciesMoleculesPanelHolderList}"
+							var="species" id="moleculesPanel">
+							<a4j:include viewId="#{navigator.getMoleculesForm(species.id)}" />
+						</a4j:repeat>
+					</h:panelGrid>
+					<h:panelGrid id="formPanel2">
+						<a4j:repeat
+							value="#{navigator.porcessesTransitionsPanelHolderList}"
+							var="species" id="transitionsPanel">
+							<a4j:include viewId="#{navigator.getTransitionsForm(species.id)}" />
+						</a4j:repeat>
+					</h:panelGrid>
+					<h:panelGrid id="formPanel3">
+						<a4j:repeat
+							value="#{navigator.porcessesCollisionsPanelHolderList}"
+							var="species" id="collisionsPanel">
+							<a4j:include viewId="#{navigator.getCollisionsForm(species.id)}" />
+						</a4j:repeat>
+					</h:panelGrid>
+					<h:panelGrid id="formPanel4">
+						<a4j:include id="formBody4" viewId="#{navigator.freeFormPanel}" />
+					</h:panelGrid>
+					<h:panelGrid id="formButtonsPanel">
+						<a4j:include id="formButtons"
+							viewId="#{navigator.formButtonsPanel}" />
+					</h:panelGrid>
+
+				</h:panelGrid>
+			</a4j:form></td>
+			<td style="vertical-align: top" width="40%"><a4j:form
+				ajaxSubmit="true">
+				<h:panelGrid id="rightPanel">
+					<a4j:include viewId="#{navigator.restrictableTablePanel}" />
+				</h:panelGrid>
+			</a4j:form></td>
+		</tr>
+	</table>
+
+</ui:composition>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<style>
+	.roundButton {
+			width : 85px;
+			height: 35px; 
+			font-size:10pt; 
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+		} 
+</style>
+	<h:panelGrid columns="2">
+		<h:panelGrid columns="1">
+			<rich:spacer width="150"/>
+		</h:panelGrid>
+		<h:panelGrid columns="6">
+			<rich:spacer width="25" />
+			<a4j:commandButton value="Clear All" action="#{navigator.clearForm()}"
+				reRender="mainOptionPanel, formPanel1, formPanel1A, formPanel2, formPanel3, formPanel4, rightPanel, formButtonsPanel" styleClass="roundButton" style="background-color:#F1ECFF; color:black;"/>
+			<rich:spacer width="45" />
+			<a4j:commandButton value="Remove All" action="#{navigator.cancelQueryBuilder()}" styleClass="roundButton"
+				reRender="mainOptionPanel, formPanel1, formPanel1A, formPanel2, formPanel3, formPanel4, rightPanel, formButtonsPanel" style="background-color:#F1ECFF; color:black;"/>
+			<rich:spacer width="45" />
+			<a4j:commandButton value="Preview"
+				action="#{navigator.executeQueryStage1()}" styleClass="roundButton" style="background-color:#F1ECFF; color:black;"
+				reRender="mainOptionPanel, formPanel1, formPanel1A, formPanel2, formPanel3, formPanel4, rightPanel, formButtonsPanel"></a4j:commandButton>
+		</h:panelGrid>
+	</h:panelGrid>
+</ui:composition>
