@@ -25,7 +25,8 @@
 				<h:outputText>Atoms
 					<rich:spacer width="435" />
 					
-					<h:graphicImage id="clearPanel_#{species.id}" value="/img/erase.png" width="15">
+					<h:graphicImage id="clearPanel_#{species.id}" value="/img/erase.png" width="15" 
+					rendered="#{not navigator.stage1Display}">
 					<rich:toolTip value="Clear Form Fields" styleClass="tooltip"/>
 						<a4j:support event="onclick" reRender="formPanel1, formButtonsPanel"
 						action="#{species.backingBean.clearFields()}"></a4j:support>
@@ -33,7 +34,8 @@
 					
 					
 					<rich:spacer width="21" />
-					<h:graphicImage id="removePanel_#{species.id}" value="/img/false.png">
+					<h:graphicImage id="removePanel_#{species.id}" value="/img/false.png"
+						rendered="#{not navigator.stage1Display}">
 					<rich:toolTip value="Remove the Form Panel" styleClass="tooltip" />
 						<a4j:support event="onclick" reRender="formPanel1, formButtonsPanel"
 						action="#{navigator.removeSpeciesAtomsPanel(species)}"></a4j:support>

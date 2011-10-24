@@ -36,7 +36,8 @@
 			<f:facet name="header">
 				<h:outputText>Molecules
 				<rich:spacer width="415" />
-					<h:graphicImage id="clearPanel_#{species.id}" value="/img/erase.png" width="15">
+					<h:graphicImage id="clearPanel_#{species.id}" value="/img/erase.png" width="15"
+						rendered="#{not navigator.stage1Display}">
 					<rich:toolTip value="Clear Form Fields" styleClass="tooltip"/>
 						<a4j:support event="onclick" reRender="formPanel1A, formButtonsPanel"
 						action="#{species.backingBean.clearFields()}"></a4j:support>
@@ -44,7 +45,8 @@
 					
 					
 					<rich:spacer width="21" />
-					<h:graphicImage id="removePanel_#{species.id}" value="/img/false.png">
+					<h:graphicImage id="removePanel_#{species.id}" value="/img/false.png"
+						rendered="#{not navigator.stage1Display}">
 					<rich:toolTip value="Remove the Form Panel" styleClass="tooltip" />
 						<a4j:support event="onclick" reRender="formPanel1A, formButtonsPanel"
 						action="#{navigator.removeSpeciesMoleculesPanel(species)}"></a4j:support>
