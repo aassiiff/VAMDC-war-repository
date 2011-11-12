@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<style>
+.top {
+	vertical-align: top;
+}
+
+.pbody {
+	padding: 0px;
+	height: 120px;
+	width: 150px;
+}
+
+.select {
+	height: 21px;
+	padding: 0px 0px 0px 0px;
+	color: black;
+	font: 12px/21px arial, sans-serif;
+	overflow: hidden;
+}
+.panelBodyClass {
+			background-color: #E9F1FF
+		}
+</style>
+	<h:panelGrid columns="2">
+		<h:panelGrid columns="1">
+			<rich:spacer width="100" />
+		</h:panelGrid>
+		<rich:simpleTogglePanel style="background-color:#E9F1FF"
+			id="atomPanel" switchType="client" bodyClass="panelBodyClass">
+			<f:facet name="header">
+				<h:outputText>
+					Transitions
+				<rich:spacer width="410" />
+					<h:graphicImage id="clearPanel_#{species.id}" value="/img/erase.png" width="15" 
+					rendered="#{not navigator.stage1Display}">
+					<rich:toolTip value="Clear Form Fields" styleClass="tooltip"/>
+						<a4j:support event="onclick" reRender="formPanel2, formButtonsPanel"
+						action="#{species.backingBean.clearFields()}"></a4j:support>
+					</h:graphicImage>
+					
+					
+					<rich:spacer width="20" />
+					<h:graphicImage id="removePanel_#{species.id}" value="/img/false.png"
+						rendered="#{not navigator.stage1Display}">
+					<rich:toolTip value="Remove the Form Panel" styleClass="tooltip" />
+						<a4j:support event="onclick" reRender="formPanel2, formButtonsPanel"
+						action="#{navigator.removeTransitionsPanel(species)}"></a4j:support>
+					</h:graphicImage>
+					<rich:spacer width="22" />
+				</h:outputText>
+			</f:facet>
+
+			<h:panelGrid columns="1" columnClasses="top, top">
+				<rich:layout>
+					<rich:layoutPanel>
+						<a4j:include viewId="includeTranstions.xhtml" />
+					</rich:layoutPanel>
+				</rich:layout>
+			</h:panelGrid>
+
+		</rich:simpleTogglePanel>
+	</h:panelGrid>
+</ui:composition>

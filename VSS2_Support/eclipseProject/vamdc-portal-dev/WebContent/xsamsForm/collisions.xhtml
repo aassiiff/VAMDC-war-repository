@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+	<style>
+		.top {
+			vertical-align: top;
+		}
+		
+		
+		.panelBodyClass {
+			background-color: #E9F1FF
+		}
+	</style>
+
+	<h:panelGrid columns="2">
+		<h:panelGrid columns="1">
+			<rich:spacer width="100" />
+		</h:panelGrid>
+		
+		<rich:simpleTogglePanel style="background-color:#E9F1FF"
+			id="atomPanel" switchType="client" bodyClass="panelBodyClass">
+			<f:facet name="header">
+				<h:outputText>Collisions
+				<rich:spacer width="453" />
+				
+	            <h:graphicImage value="/img/false.png">
+					<rich:toolTip value="Remove the Form Panel" styleClass="tooltip" />
+						<a4j:support event="onclick" reRender="formPanel3, formButtonsPanel"
+						action="#{navigator.removeCollisionsPanel(species)}"></a4j:support>
+					</h:graphicImage>
+					<rich:spacer width="22" /></h:outputText>
+				
+			</f:facet>
+
+			<h:panelGrid columns="2" columnClasses="top, top" id="collisonsPanel">
+				<h:panelGrid columns="3" columnClasses="top, top">
+					<h:outputText value="Process Name" style="font-weight:bold"/>
+					<rich:spacer width="50" height="10" />
+					<h:inputText value="#{species.backingBean.processName}" style=" width : 353px;" disabled="#{not species.backingBean.editable}" id="processName">
+						<rich:suggestionbox for="processName" var="result" suggestionAction="#{species.backingBean.autoCompleteForProcessName}" width="280" border="0">
+			                <h:column style=" width : 253px;">			
+			                	<h:outputText value="#{result.processName}" style=" width : 253px;"/>			
+			                </h:column>
+			                <a4j:support event="onselect" action="#{species.backingBean.onSelectForProcessName}" reRender="collisonsPanel"/>	
+	                	</rich:suggestionbox>
+					</h:inputText>
+					
+					<h:outputText value="Process Description:" style="font-weight:bold"/>
+					<rich:spacer />
+					<h:inputTextarea value="#{species.backingBean.processDescription}" style=" width : 353px;" disabled="true">
+						
+					</h:inputTextarea>
+					
+					<h:outputText value="Process Code:" style="font-weight:bold"/>
+					<rich:spacer width="20" height="10" />
+					<h:inputText value="#{species.backingBean.collisionCode}" style=" width : 353px;" disabled="#{not species.backingBean.editable}" id="processCode">
+						<rich:suggestionbox for="processCode" var="result" suggestionAction="#{species.backingBean.autoCompleteForProcessCode}" width="280" border="0">
+			                <h:column style=" width : 253px;">			
+			                	<h:outputText value="#{result.processCode}" style=" width : 253px;"/>			
+			                </h:column>
+			                <a4j:support event="onselect" action="#{species.backingBean.onSelectForProcessCode}" reRender="collisonsPanel"/>	
+	                	</rich:suggestionbox>
+						<a4j:support event="onkeyup" action="#{selectedRestrictables.keyEventOnBlur('collisionCode', species.backingBean.collisionCode, '')}" 
+								reRender="rightPanel"></a4j:support>
+					</h:inputText>
+					
+					<h:outputText value="IAEA Process Code:" style="font-weight:bold"/>
+					<rich:spacer width="20" height="10" />
+					<h:inputText value="#{species.backingBean.collisionIAEACode}" style=" width : 353px;" disabled="#{not species.backingBean.editable}" id="iaeaCode">
+						<rich:suggestionbox for="iaeaCode" var="result" suggestionAction="#{species.backingBean.autoCompleteForIAEAsCode}" width="280" border="0">
+			                <h:column style=" width : 253px;">			
+			                	<h:outputText value="#{result.iaeaCode}" style=" width : 253px;"/>			
+			                </h:column>
+			                <a4j:support event="onselect" action="#{species.backingBean.onSelectForIAEAsCode()}" reRender="collisonsPanel"/>	
+	                	</rich:suggestionbox>
+						<a4j:support event="onkeyup" action="#{selectedRestrictables.keyEventOnBlur('collisionIAEACode', species.backingBean.collisionIAEACode, '')}" 
+								reRender="rightPanel"></a4j:support>
+					</h:inputText>					
+
+				</h:panelGrid>
+			</h:panelGrid>
+
+		</rich:simpleTogglePanel>
+	</h:panelGrid>
+</ui:composition>

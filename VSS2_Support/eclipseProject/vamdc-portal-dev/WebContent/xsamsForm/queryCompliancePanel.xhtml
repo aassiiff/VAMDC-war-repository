@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<style>
+.top {
+	vertical-align: top;
+}
+
+.select {
+	height: 21px;
+	padding: 0px 0px 0px 0px;
+	color: black;
+	font: 12px/21px arial, sans-serif;
+	overflow: hidden;
+}
+</style>
+
+	<h:panelGrid columns="2">
+		<h:panelGrid columns="1">
+			<rich:spacer width="102" />
+		</h:panelGrid>
+		<rich:panel style="background-color:#E9F1FF">
+			<h:outputText value="VAMDC Query Compliance" style="font-weight:bold" />
+			
+			<rich:spacer width="264" />
+			<h:selectOneMenu styleClass="select" style="width: 130px;" value="#{navigator.vssVersion}">
+				<f:selectItem itemValue="VSS1" itemLabel="VSS1" />
+				<f:selectItem itemValue="VSS2" itemLabel="VSS2" />
+				<a4j:support event="onchange" reRender="formPanel1, formPanel1A"/>
+			</h:selectOneMenu>
+		</rich:panel>
+	</h:panelGrid>
+
+</ui:composition>

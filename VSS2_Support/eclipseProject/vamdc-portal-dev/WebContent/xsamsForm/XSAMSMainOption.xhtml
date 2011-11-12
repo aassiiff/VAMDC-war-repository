@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j">
+
+	<style>
+        
+        
+        .panelClass {
+		    top: 170px;
+		    position: fixed;		
+		    valign: top;
+		}  
+		
+		.roundButton {
+			width : 85px;
+			height: 35px; 
+			font-size:10pt;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			} 
+    </style>
+    
+	<h:panelGrid styleClass="panelClass">
+        <rich:panel>
+            <f:facet name="header">
+                <h:outputText value="Query Parameters"/>
+            </f:facet>
+            
+            <a4j:form ajaxSubmit="true">
+	                           
+	                <a4j:commandButton value="Atoms" reRender="formPanel1, formPanel4, mainOptionPanel, formButtonsPanel" 
+	                action="#{navigator.subOptionSpeciesAtoms}" disabled="#{navigator.stage1Display}" 
+	                styleClass="roundButton" style="background-color:#F1ECFF; color:black;"/>
+	            
+            </a4j:form>
+            
+            <rich:spacer height="10"/>
+            
+            <a4j:form ajaxSubmit="true">
+	                            
+	                <a4j:commandButton value="Molecules" reRender="formPanel1A, formPanel4, mainOptionPanel, formButtonsPanel" 
+	                action="#{navigator.subOptionSpeciesMolecules}" disabled="#{navigator.stage1Display}" 
+	                style="background-color:#F1ECFF; color:black" styleClass="roundButton"/>
+	            
+            </a4j:form>
+            
+            <rich:spacer height="10"/>
+            
+            <a4j:form ajaxSubmit="true">
+	            
+	                <a4j:commandButton value="Transitions" reRender="formPanel2, formPanel4, formButtonsPanel" 
+	                action="#{navigator.subOptionTransitions}" disabled="#{navigator.stage1Display}" 
+	                style=" width : 85px; height: 35px; background-color:#F1ECFF; font-size:10pt; color:black" styleClass="roundButton"/>
+	           
+            </a4j:form>
+            
+            <rich:spacer height="10"/>
+            
+            <a4j:form ajaxSubmit="true">
+	                           
+	                <a4j:commandButton value="Collisions" reRender="formPanel3, formPanel4, mainOptionPanel, formButtonsPanel" 
+	               	action="#{navigator.subOptionCollisions}" disabled="#{navigator.stage1Display}" 
+	               	style=" width : 85px; height: 35px; background-color:#F1ECFF; font-size:10pt; color:black" styleClass="roundButton"/> 
+	            
+            </a4j:form>
+            
+            <rich:spacer height="10"/> 
+            
+            <a4j:form ajaxSubmit="true">
+	            
+	                <a4j:commandButton value="Free Form" reRender="formPanel1, formPanel1A, formPanel2, formPanel3, formPanel4, mainOptionPanel, formButtonsPanel" 
+	                	action="#{navigator.subOptionFreeForm}" disabled="#{navigator.stage1Display}" rendered="false"
+	                	style=" width:85px; height: 35px; background-color:#F1ECFF; font-size:10pt; color:black" styleClass="roundButton"/>              
+	            
+            </a4j:form>
+                     
+        </rich:panel>
+       
+    </h:panelGrid> 
+    <rich:spacer height="00"/>               
+
+</ui:composition>

@@ -1,0 +1,86 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<rich:panel>
+		<h:form>
+			<rich:dataTable id="queryListAll" rows="50"
+				columnClasses="col" value="#{queryLog.submittedQueryList}"
+				var="categoryAB">
+				<f:facet name="header">
+					<rich:columnGroup>
+						<h:column rowspan="2">
+							<h:outputText styleClass="headerText" value="Query" />
+						</h:column>
+						<h:column colspan="4">
+							<h:outputText styleClass="headerText" value="Resource" />
+						</h:column>
+						
+
+					</rich:columnGroup>
+				</f:facet>
+
+				<h:column>
+					<h:outputText value="#{categoryAB.queryString}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<rich:columnGroup>
+
+						</rich:columnGroup>
+					</f:facet>
+					<rich:dataTable width="483" id="queryList"
+						onRowMouseOver="this.style.backgroundColor='#F1F1F1'"
+						onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+						value="#{categoryAB.submittedQueryList}" var="categoryB">
+
+						<h:column>
+							<h:outputText
+								value="#{categoryB.resoourceURL}#{categoryB.encodedQuery}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="Finished"
+								rendered="#{categoryB.queryStatus}" />
+							<h:outputText value="Executing"
+								rendered="#{not categoryB.queryStatus}" />
+						</h:column>
+						<h:column>
+							
+							<s:link
+								rendered="#{categoryB.queryStatus and categoryB.queryType == 'XSAMS'}"
+								onclick="window.open('#{registryBrowser.staticApplicationURL}/html/#{categoryB.queryID}.html','htmlwindow','scrollbars=yes, resizable=yes,toolbar=no, width=1200,height=800')"
+								disabled="true">
+								<h:outputText value="View" />
+							</s:link>
+							<h:graphicImage id="loadingImage1" value="/img/waitingIcon.gif" width="40%"
+								rendered="#{not categoryB.queryStatus}" />
+						</h:column>
+
+						<h:column>
+							<s:link
+								rendered="#{categoryB.queryStatus and categoryB.queryType == 'XSAMS'}"
+								onclick="window.open('#{registryBrowser.staticApplicationURL}/xsams/#{categoryB.queryID}.xml','xsamswindow','scrollbars=yes, resizable=yes,toolbar=no, width=1200,height=800')">
+								<h:outputText value="View" />
+							</s:link>
+							<h:graphicImage id="loadingImage2" value="/img/waitingIcon.gif" width="40%"
+								rendered="#{not categoryB.queryStatus}" />
+						</h:column>
+						
+					</rich:dataTable>
+				</h:column>
+
+
+			</rich:dataTable>
+
+		</h:form>
+
+	</rich:panel>
+
+</ui:composition>

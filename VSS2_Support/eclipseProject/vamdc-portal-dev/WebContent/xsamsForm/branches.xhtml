@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+	
+	<style>     
+        .active {
+			color:black;
+		} 
+		.inactive {
+			color:gray;
+		} 
+    </style>
+    
+	<h:panelGrid columns="2" id="branchPanel">
+		<rich:spacer width="100" />
+		<a4j:form id="freeFormPanel">
+		<rich:panel style="background-color:#EDFFE6">
+			<f:facet name="header">
+				<h:outputText value="Include in result"></h:outputText>
+			</f:facet>
+			<rich:spacer width="360"/>
+			<h:panelGrid columns="6">
+				<a4j:commandButton value="Select All" action="#{branches.selectAll}"
+						reRender="branchPanel,freeFormPanel" />
+				<a4j:commandButton value="Select None" action="#{branches.selectNone}"
+						reRender="branchPanel,freeFormPanel" />		
+			</h:panelGrid>
+			
+			<rich:tree  value="#{branches.tree}" var="node" mode="ajax" adviseNodeOpened="#{branches.expanded}">
+				<rich:treeNode iconLeaf="/img/tree_on.png" icon="/img/tree_on.png"
+                      rendered="#{node.active}">
+					<a4j:commandLink value="#{node.name}" action="#{node.clicked}" 
+							reRender="branchPanel,freeFormPanel" />
+        		</rich:treeNode>
+				<rich:treeNode iconLeaf="/img/tree_off.png" icon="/img/tree_off.png"
+                      rendered="#{not node.active}">
+					<a4j:commandLink value="#{node.name}" action="#{node.clicked}" 
+							reRender="branchPanel,freeFormPanel" />
+        		</rich:treeNode>
+				
+			</rich:tree>
+			
+		</rich:panel>
+		</a4j:form>
+	</h:panelGrid>
+</ui:composition>

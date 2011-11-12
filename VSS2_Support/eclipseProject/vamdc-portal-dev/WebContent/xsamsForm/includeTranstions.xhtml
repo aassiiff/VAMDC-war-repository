@@ -1,0 +1,149 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+
+	<style>
+.top {
+	vertical-align: top;
+}
+
+.select {
+	height: 21px;
+	padding: 0px 0px 0px 0px;
+	color: black;
+	font: 12px/21px arial, sans-serif;
+	overflow: hidden;
+}
+</style>
+
+
+	<h:panelGrid columns="7" columnClasses="top, top">
+
+		<h:outputText value="RadTransWavelength:" style="font-weight:bold" />
+
+		<rich:spacer width="40" />
+
+		<h:outputText value="Input Parameter" />
+		<h:selectOneMenu
+			value="#{species.backingBean.transitions.inputParameter}"
+			styleClass="select" style="width: 130px;">
+			<f:selectItem itemValue="Wavelength" itemLabel="Wavelength" />
+			<f:selectItem itemValue="Wavenumber" itemLabel="Wavenumber" />
+			<f:selectItem itemValue="Frequency" itemLabel="Frequency" />
+			<f:selectItem itemValue="energy" itemLabel="Energy" />
+
+			<a4j:support event="onchange"
+				action="#{species.backingBean.transitions.inputParameterChange()}"
+				reRender="unitPanel, wavelengthValuesPanel"></a4j:support>
+		</h:selectOneMenu>
+
+		<rich:spacer width="24" />
+
+		<h:outputText value="Unit" />
+		<h:selectOneMenu styleClass="select" style="width: 70px;"
+			id="unitPanel"
+			value="#{species.backingBean.transitions.selectedUnit}">
+			<f:selectItems
+				value="#{species.backingBean.transitions.unitsSelectItem}" />
+			<a4j:support event="onchange"
+				action="#{species.backingBean.transitions.unitChange()}"
+				reRender="wavelengthValuesPanel"></a4j:support>
+		</h:selectOneMenu>
+
+	</h:panelGrid>
+
+	<h:panelGrid columns="3" style="float: right">
+		<rich:spacer width="100" />
+		<h:outputText value="From" />
+		<h:inputText value="#{species.backingBean.transitions.inputValueFrom}"
+			id="radTransWavelengthFrom" style=" width : 307px;"
+			disabled="#{not species.backingBean.editable}">
+			<a4j:support event="onblur"
+				action="#{selectedRestrictables.keyEventOnBlur('radTransWavelength', species.backingBean.transitions.inputValueFrom, species.backingBean.transitions.inputValueTo)}"
+				reRender="rightPanel"></a4j:support>
+			<a4j:support event="onkeyup"
+				action="#{species.backingBean.transitions.inputConverterFrom()}"
+				reRender="wavelengthValuesPanel"></a4j:support>
+		</h:inputText>
+	</h:panelGrid>
+	<h:panelGrid columns="3" style="float: right">
+		<rich:spacer width="100" />
+		<h:outputText value="To" />
+		<h:inputText value="#{species.backingBean.transitions.inputValueTo}"
+			id="radTransWavelengthTo" style=" width :307px;"
+			disabled="#{not transitions.editable}">
+			<a4j:support event="onblur"
+				action="#{selectedRestrictables.keyEventOnBlur('radTransWavelength', species.backingBean.transitions.inputValueFrom, species.backingBean.transitions.inputValueTo)}"
+				reRender="rightPanel"></a4j:support>
+			<a4j:support event="onkeyup"
+				action="#{species.backingBean.transitions.inputConverterTo()}"
+				reRender="wavelengthValuesPanel"></a4j:support>
+		</h:inputText>
+	</h:panelGrid>
+	<h:panelGrid columns="5" style="float: right"
+		id="wavelengthValuesPanel">
+		<h:outputText value="equivalent to"
+			style="font-style:italic; font-family:serif; font-size:13px" />
+		<rich:spacer width="20" />
+		<h:outputText
+			value="#{species.backingBean.transitions.radTransWavelengthFrom} Å"
+			style="font-style:italic; font-family:serif; font-size:10px; width:145px; float: right" />
+		<rich:spacer width="10" />
+		<h:outputText
+			value="#{species.backingBean.transitions.radTransWavelengthTo} Å"
+			style="font-style:italic; font-family:serif; font-size:10px; width:145px; float: right" />
+	</h:panelGrid>
+
+	<h:panelGrid columns="7" style="float: right">
+		<h:outputText value="Initial State Energy:" style="font-weight:bold" />
+		<rich:spacer width="40" />
+		<h:outputText value="From" />
+		<h:inputText value="#{species.backingBean.transitions.stateEnergyFrom}"
+			style=" width : 118px;" disabled="#{not transitions.editable}">
+			<a4j:support event="onkeyup"
+				action="#{selectedRestrictables.keyEventOnBlur('atomStateEnergy', species.backingBean.transitions.stateEnergyFrom, species.backingBean.transitions.stateEnergyTo)}"
+				reRender="rightPanel"></a4j:support>
+		</h:inputText>
+		<h:outputText value="To" />
+		<h:inputText value="#{species.backingBean.transitions.stateEnergyTo}"
+			style=" width : 118px;">
+			<!-- -->
+			<a4j:support event="onkeyup"
+				action="#{selectedRestrictables.keyEventOnBlur('atomStateEnergy', species.backingBean.transitions.stateEnergyFrom, species.backingBean.transitions.stateEnergyTo)}"
+				reRender="rightPanel"></a4j:support>
+		</h:inputText>
+		<h:selectOneMenu styleClass="select"
+			disabled="#{not transitions.editable}"
+			value="#{species.backingBean.transitions.stateEnergySelectedUnit}">
+			<f:selectItem itemValue="eV" itemLabel="eV" />
+			<f:selectItem itemValue="J" itemLabel="J" />
+			<f:selectItem itemValue="erg" itemLabel="erg" />
+		</h:selectOneMenu>
+
+		<h:outputText value="RadTransProbabilityA:" style="font-weight:bold" />
+		<rich:spacer />
+		<h:outputText value="From" />
+		<h:inputText value="#{species.backingBean.transitions.radTransProbabilityAFrom}"
+			style=" width : 118px;" disabled="#{not transitions.editable}">
+			<a4j:support event="onkeyup"
+				action="#{selectedRestrictables.keyEventOnBlur('radTransProbabilityA', species.backingBean.transitions.radTransProbabilityAFrom, species.backingBean.transitions.radTransProbabilityATo)}"
+				reRender="rightPanel"></a4j:support>
+		</h:inputText>
+		<h:outputText value="To" />
+		<h:inputText value="#{species.backingBean.transitions.radTransProbabilityATo}"
+			style=" width : 118px;" disabled="#{not transitions.editable}">
+			<a4j:support event="onkeyup"
+				action="#{selectedRestrictables.keyEventOnBlur('radTransProbabilityA', species.backingBean.transitions.radTransProbabilityAFrom, species.backingBean.transitions.radTransProbabilityATo)}"
+				reRender="rightPanel"></a4j:support>
+		</h:inputText>
+		<h:outputText value="1/s" />
+	</h:panelGrid>
+
+
+
+</ui:composition>
